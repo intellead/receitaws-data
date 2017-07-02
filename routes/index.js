@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     } else {
         cnpj = cnpjParam;
     }
-    console.log("cnpj: " + cnpjParam);
+    console.log("cnpj: " + cnpj);
     var queryReceitaws = receitaws+cnpj;
     console.log("queryReceitaws: " + queryReceitaws);
     request(queryReceitaws, function (error, response, body) {
