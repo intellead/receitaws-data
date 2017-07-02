@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
     var receitaws = 'https://www.receitaws.com.br/v1/cnpj/';
     var params = url.parse(req.url, true).query;
     var cnpjParam = params.cnpj;
+    cnpjParam = cnpjParam.toString();
     console.log("cnpjParam: " + cnpjParam);
     if (cnpjParam == '' || cnpjParam == undefined) {
         return res.render('index', { title: 'receitaws-data' });
