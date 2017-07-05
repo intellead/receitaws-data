@@ -21,8 +21,27 @@ router.get('/', function(req, res, next) {
     var queryReceitaws = receitaws+cnpj;
     request(queryReceitaws, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            var info = JSON.parse(body);
-            res.status(200).send(info);
+            var receitaWSResponse = JSON.parse(body);
+            var data ={
+                "cnpj": receitaWSResponse.cnpj,
+                "company_type": receitaWSResponse.tipo,
+                "company_opening_date": receitaWSResponse.abertura,
+                "company_name": receitaWSResponse.nome,
+                "company_fantasy_name": receitaWSResponse.fantasia,
+                "main_activity_code": receitaWSResponse.atividade_principal.code,
+                "main_activity_name": receitaWSResponse.atividade_principal.text,
+                "company_social_capital": receitaWSResponse.capital_social,
+                "company_uf": receitaWSResponse.uf,
+                "company_situation": receitaWSResponse.situacao,
+                "company_neighborhood": receitaWSResponse.bairro,
+                "company_street": receitaWSResponse.logradouro,
+                "company_adress_number": receitaWSResponse.numero,
+                "company_zip_code": receitaWSResponse.cep,
+                "company_city": receitaWSResponse.municipio,
+                "company_telephone": receitaWSResponse.telefone,
+                "company_board members" : receitaWSResponse.qsa
+            };
+            res.status(200).send(data);
         }
     });
 });
