@@ -39,7 +39,7 @@ router.get('/', function(req, res, next) {
                 "company_zip_code": receitaWSResponse.cep,
                 "company_city": receitaWSResponse.municipio,
                 "company_telephone": receitaWSResponse.telefone,
-                "company_board members" : receitaWSResponse.qsa
+                "company_board_members" : receitaWSResponse.qsa
             };
             res.status(200).send(data);
         }
