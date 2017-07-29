@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
     request(queryReceitaws, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var receitaWSResponse = JSON.parse(body);
-            var data ={
+            var data = {
                 "cnpj": receitaWSResponse.cnpj,
                 "company_type": receitaWSResponse.tipo,
                 "company_opening_date": receitaWSResponse.abertura,
