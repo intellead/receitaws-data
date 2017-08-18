@@ -6,8 +6,6 @@ var request = require('request');
 router.get('/', function(req, res, next) {
     var params = url.parse(req.url, true).query;
     var cnpjParam = params.cnpj;
-    console.log('Entrou!' + params.cnpj);
-    console.log('cnpjParam: ' + cnpjParam);
     if (cnpjParam == '' || cnpjParam == undefined) {
         res.sendStatus(422);
         return res.render('index', { title: 'receitaws-data' });
@@ -20,14 +18,10 @@ router.get('/', function(req, res, next) {
     } else {
         cnpj = cnpjParam;
     }
-    console.log('cnpj: ' + cnpj);
     var queryReceitaws = 'https://www.receitaws.com.br/v1/cnpj/'+cnpj;
-    console.log('queryReceitaws: ' + queryReceitaws);
     request(queryReceitaws, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log('Without error and status code 200 ' + cnpj );
             var receitaWSResponse = JSON.parse(body);
-            console.log(cnpj + ' status ' + receitaWSResponse.status);
             if (receitaWSResponse.status != 'OK') {
                 res.sendStatus(204);
             }
