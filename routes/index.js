@@ -4,9 +4,9 @@ var url = require('url');
 var request = require('request');
 
 router.get('/', function(req, res, next) {
-    console.log('Entrou!' + params.cnpj);
     var params = url.parse(req.url, true).query;
     var cnpjParam = params.cnpj;
+    console.log('Entrou!' + params.cnpj);
     console.log('cnpjParam: ' + cnpjParam);
     if (cnpjParam == '' || cnpjParam == undefined) {
         res.sendStatus(422);
