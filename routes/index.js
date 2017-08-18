@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
     var params = url.parse(req.url, true).query;
     var cnpjParam = params.cnpj;
     if (cnpjParam == '' || cnpjParam == undefined) {
+        res.sendStatus(422);
         return res.render('index', { title: 'receitaws-data' });
     }
     var cnpj = '';
@@ -17,8 +18,7 @@ router.get('/', function(req, res, next) {
     } else {
         cnpj = cnpjParam;
     }
-    var receitaws = 'https://www.receitaws.com.br/v1/cnpj/';
-    var queryReceitaws = receitaws+cnpj;
+    var queryReceitaws = 'https://www.receitaws.com.br/v1/cnpj/'+cnpj;
     request(queryReceitaws, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var receitaWSResponse = JSON.parse(body);
@@ -43,6 +43,9 @@ router.get('/', function(req, res, next) {
             };
             res.status(200).send(data);
         } else {
+            if (error) {
+                console.log("Error: " + error);
+            }
             res.sendStatus(response.statusCode);
         }
     });
