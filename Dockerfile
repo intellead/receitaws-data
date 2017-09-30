@@ -2,7 +2,11 @@ FROM node
 
 ENV HOME=/home/intellead/receitaws-data
 
-ENV PORT=3001
+ENV PORT=3000
+
+ENV REGISTRY_URL=localhost
+
+ENV REGISTRY_PORT=8761
 
 COPY app.js package.json $HOME/app/
 
