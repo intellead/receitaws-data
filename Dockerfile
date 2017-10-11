@@ -1,24 +1,20 @@
 FROM node:8.6.0-alpine
 
-ENV HOME=/home/intellead/receitaws-data
+WORKDIR /usr/src/intellead/receitaws-data/app
 
-WORKDIR $HOME/app
-
-COPY package.json $HOME/app/
+COPY package.json ./
 
 RUN npm install --silent --progress=false --production
 
-COPY app.js $HOME/app/
+COPY app.js ./
 
-COPY bin/ $HOME/app/bin
+COPY bin/ ./bin
 
-COPY public/stylesheets/ $HOME/app/public/stylesheets
+COPY public/stylesheets/ ./public/stylesheets
 
-COPY routes/ $HOME/app/routes
+COPY routes/ ./routes
 
-COPY views/ $HOME/app/views
-
-ENV PORT=3000
+COPY views/ ./views
 
 EXPOSE 3000
 
