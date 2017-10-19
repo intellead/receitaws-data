@@ -1,0 +1,20 @@
+{
+  "cnpj":"06.990.590/0001-23",
+  "company_type":"MATRIZ",
+  "company_opening_date":"01/09/2004",
+  "company_name":"GOOGLE BRASIL INTERNET LTDA.",
+  "company_fantasy_name":"",
+  "company_social_capital":"56758501.00",
+  "company_uf":"SP",
+  "company_situation":"ATIVA",
+  "company_neighborhood":"ITAIM BIBI",
+  "company_street":"AV BRIGADEIRO FARIA LIMA",
+  "company_adress_number":"3477",
+  "company_zip_code":"04.538-133",
+  "company_city":"SAO PAULO",
+  "company_telephone":"(11) 2395-8400",
+  "company_board_members":[
+    {"qual":"37-Sócio Pessoa Jurídica Domiciliado no Exterior","qual_rep_legal":"17-Procurador","nome_rep_legal":"YUN KI LEE","pais_origem":"ESTADOS UNIDOS","nome":"GOOGLE INTERNATIONAL LLC"},
+    {"qual":"37-Sócio Pessoa Jurídica Domiciliado no Exterior","qual_rep_legal":"17-Procurador","nome_rep_legal":"YUN KI LEE","pais_origem":"ESTADOS UNIDOS","nome":"GOOGLE INC"},
+    {"qual":"05-Administrador","nome":"FABIO JOSE SILVA COELHO"}
+  ]}
