@@ -7,8 +7,7 @@ router.get('/', function(req, res, next) {
     var params = url.parse(req.url, true).query;
     var cnpjParam = params.cnpj;
     if (cnpjParam == '' || cnpjParam == undefined) {
-        res.sendStatus(422);
-        return res.render('index', { title: 'receitaws-data' });
+        return res.sendStatus(422);
     }
     var cnpj = '';
     if (cnpjParam.includes('.') || cnpjParam.includes('/') || cnpjParam.includes('-')) {
