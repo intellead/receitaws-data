@@ -20,6 +20,8 @@ var server = require('../bin/www');
 var expect = require('chai').expect;
 var request = require('supertest');
 var google_company_data = require('./google_company_data.json');
+var sinon = require('sinon');
+var request_stub = sinon.stub();
 
 describe('/', function() {
 
@@ -28,8 +30,10 @@ describe('/', function() {
     });
 
     it('should return status code 422', function(done) {
+        request_stub.withArgs({url: 'http://intellead-security:8080/auth/1'}).yields(null, {'statusCode': 200}, null);
         request(server)
             .get('/')
+            .set('token', '1')
             .end(function(err, res) {
                 expect(res.statusCode).to.equal(422);
                 done();
@@ -37,8 +41,10 @@ describe('/', function() {
     });
 
     it('should return status code 200 with GOOGLE data', function(done) {
+        request_stub.withArgs({url: 'http://intellead-security:8080/auth/1'}).yields(null, {'statusCode': 200}, null);
         request(server)
             .get('/?cnpj=06.990.590/0001-23')
+            .set('token', '1')
             .end(function(err, res) {
                 expect(res.statusCode).to.equal(200);
                 var actual = JSON.stringify(res.body);
