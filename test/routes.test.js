@@ -59,4 +59,14 @@ describe('/', function() {
         });
     });
 
+    it('should return status code 403', function(done) {
+        request_stub.withArgs({url: 'http://intellead-security:8080/auth/1'}).yields(null, {'statusCode': 403}, null);
+        request.get('/')
+            .set('token', '1')
+            .expect(403)
+            .end(function(err, res) {
+                done();
+            });
+    });
+
 });
