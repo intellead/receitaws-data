@@ -16,34 +16,55 @@
  *
 */
 
-var server = require('../bin/www');
-var expect = require('chai').expect;
-var request = require('supertest');
+var sinon = require('sinon');
+var proxyquire = require('proxyquire');
+var supertest = require('supertest');
+var chai = require('chai');
+var expect = chai.expect;
+var request_stub = sinon.stub();
+var app = proxyquire('../app', {'request': request_stub});
+var request = supertest(app);
+var request2 = require('request');
+
 var google_company_data = require('./google_company_data.json');
 
 describe('/', function() {
 
-    after(function () {
-        server.close();
-    });
+    this.timeout(15000);
 
     it('should return status code 422', function(done) {
-        request(server)
-            .get('/')
+        request_stub.withArgs({url: 'http://intellead-security:8080/auth/1'}).yields(null, {'statusCode': 200}, null);
+        request.get('/')
+            .set('token', '1')
+            .expect(422)
             .end(function(err, res) {
-                expect(res.statusCode).to.equal(422);
                 done();
             });
     });
 
     it('should return status code 200 with GOOGLE data', function(done) {
-        request(server)
-            .get('/?cnpj=06.990.590/0001-23')
+        var receitaUrl = 'https://www.receitaws.com.br/v1/cnpj/06990590000123';
+        request2(receitaUrl, function (error, response, body) {
+            request_stub.withArgs({url: 'http://intellead-security:8080/auth/1'}).yields(null, {'statusCode': 200}, null);
+            request_stub.withArgs(receitaUrl).yields(error, response, body);
+            request.get('/?cnpj=06.990.590/0001-23')
+                .set('token', '1')
+                .expect(200)
+                .end(function(err, res) {
+                    var actual = JSON.stringify(res.body);
+                    var expected = JSON.stringify(google_company_data);
+                    expect(actual).to.equal(expected);
+                    done();
+                });
+        });
+    });
+
+    it('should return status code 403', function(done) {
+        request_stub.withArgs({url: 'http://intellead-security:8080/auth/1'}).yields(null, {'statusCode': 403}, null);
+        request.get('/')
+            .set('token', '1')
+            .expect(403)
             .end(function(err, res) {
-                expect(res.statusCode).to.equal(200);
-                var actual = JSON.stringify(res.body);
-                var expected = JSON.stringify(google_company_data);
-                expect(actual).to.equal(expected);
                 done();
             });
     });
