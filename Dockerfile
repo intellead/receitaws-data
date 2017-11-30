@@ -12,8 +12,6 @@ COPY bin/ ./bin
 
 COPY public/stylesheets/ ./public/stylesheets
 
-COPY routes/ ./routes
-
 EXPOSE 3000
 
 CMD ["npm", "start"]
