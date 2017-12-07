@@ -103,4 +103,4 @@ This service return a json like this:
 
 
 <h3>Copyrights and Licence</h3>
-TO DO
+Project copyright and license is available at <a href="https://github.com/intellead/receitaws-data/blob/master/LICENSE">LICENSE</a>.
